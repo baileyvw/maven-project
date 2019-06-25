@@ -4,9 +4,19 @@ pipeline {
         stage('Build'){
             steps {
                 sh 'mvn clean package'
-                sh 'docker build . -t tomactwebapp:${env.}'
+                sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
+            }
+            post {
+                success {
+                    echo 'Code deployed to Production.'
+                }
+
+                failure {
+                    echo ' Deployment failed.'
+                }
             }
             }
         }
 //                build job: 'Deploy-to-staging'
 }
+
