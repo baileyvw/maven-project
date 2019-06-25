@@ -7,7 +7,7 @@ ADD ./webapp/target/*.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 
 <<<<<<< HEAD
-CMD ["cataline.sh", run"] # this was the orinal setup
+CMD ["cataline.sh", run"] 
 
 #CMD ["/bin/sh", "/usr/local/tomcat/bin/cataline.sh run"]
 =======
