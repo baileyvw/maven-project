@@ -1,42 +1,12 @@
 pipeline {
     agent any
-
-    parameters {
-         string(name: 'tomcat_dev', defaultValue: '18.237.115.144', description: 'Staging Server')
-         string(name: 'tomcat_prod', defaultValue: '54.69.67.95', description: 'Production Server')
-    }
-
-    triggers {
-         pollSCM('* * * * *')
-     }
-
-stages{
+    stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
+                sh "docker build docker-files/ . -t tomactwebapp:${env.}"
             }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
             }
         }
-
-        stage ('Deployments'){
-            parallel{
-                stage ('Deploy to Staging'){
-                    steps {
-                        sh "scp -i /var/lib/jenkins/aws-creds/tomcatdemo.pem -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/fullyAutoaws/webapp/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
-                    }
-                }
-
-                stage ("Deploy to Production"){
-                    steps {
-                        sh "scp -i /var/lib/jenkins/aws-creds/tomcatdemo.pem -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/fullyAutoaws/webapp/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
-                    }
-                }
-            }
-        }
-    }
+//                build job: 'Deploy-to-staging'
 }
