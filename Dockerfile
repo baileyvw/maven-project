@@ -6,6 +6,6 @@ ADD ./webapp/target/*.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
-CMD ["sh", "/usr/local/tomcat/bin/cataline.sh", "run"]
+CMD ["/bin/sh", "/usr/local/tomcat/bin/cataline.sh run"]
 #CMD ["/bin/sh", "/usr/local/tomcat/bin/startup.sh"]
 #CMD ["/bin/sh", "/usr/local/tomcat/bin/cataline.sh", "run"]
