@@ -6,8 +6,14 @@ ADD ./webapp/target/*.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
+<<<<<<< HEAD
 CMD ["cataline.sh", run"] # this was the orinal setup
 
 #CMD ["/bin/sh", "/usr/local/tomcat/bin/cataline.sh run"]
+=======
+CMD ["cataline.sh", "run"]
+
+#CMD ["/usr/local/tomcat/bin/cataline.sh", "run"]
+>>>>>>> change the docker container to tomcat which is the latest path for startup7
 #CMD ["/bin/sh", "/usr/local/tomcat/bin/startup.sh"]
 #CMD ["/bin/sh", "/usr/local/tomcat/bin/cataline.sh", "run"]
