@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages{
+        stage('Build'){
+            steps {
+                sh 'mvn clean package'
+                sh "docker build docker-files/ . -t tomactwebapp:${env.}"
+            }
+            }
+        }
+//                build job: 'Deploy-to-staging'
+}
